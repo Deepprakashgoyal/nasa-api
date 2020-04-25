@@ -5,77 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Api</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<style>
-		.main-section{
-			margin-bottom: 100px;
-		}
-		.content-div{
-			padding: 30px;
-    		background: #eee;
-		}
-		h3 span{
-			font-size: 15px;
-		}
-		h3{
-			font-size: 18px;
-		}
-		p{
-			text-align: justify;
-		}
-		.content-div p:first-letter{
-			font-size: 25px;
-		}
-		h4{
-			line-height: 2;
-			font-size: 19px;
-		}
-		.page-heading{
-			padding: 30px 0 10px;
-			margin-bottom: 30px;
-			border-bottom: 1px solid #eee;
-		}
-		.page-heading p{
-			text-align: center;
-			font-size: 30px;
-			color: #0006b5;
-    		font-weight: 700;
-		}
-		#pic{
-			border-radius: 10px;
-    box-shadow: 3px 4px 7px 1px #76777d;
-		}
-		.dummy{
-			width: 100%;
-			height: 100%;
-			background-color: #eee;
-		}
-		footer{
-			background-color: #444;
-			padding: 15px;
-		}
-		footer p{
-			text-align: center;
-			color: #fff;
-			margin: 0;
-		}
-		footer p span{
-			font-size: 23px;
-			color: red;
-		}
-		footer p a{
-			text-decoration: none;
-			color: #fff;
-		}
-		footer p a:hover{
-			color: #afafaf;
-			text-decoration: none;
-		}
-		@media (max-width: 767px){
-		.pic-div{
-			margin-top: 30px;
-		}
-	}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<section class="main-section">
@@ -96,7 +26,7 @@
 						</div>
 						<div class="col-md-7">
 							<div class="form-group">
-								<input type="date" id="chooseDate" onchange="getImg()" class="form-control">
+								<input type="date" id="chooseDate" onchange="get_data()" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -120,54 +50,7 @@
 	<footer>
 		<p>Made with <span>♡</span> by <a href="https://deepprakashgoyal.github.io/about" target="_blank">Deep Prakash Goyal</a></p>
 	</footer>
-
-	<script>
-		// document.querySelector('#pic').setAttribute('width', '500');
-
-		function getImg(){
-		var picture = document.querySelector('#pic');
-		picture.removeAttribute('src');
-
-		imgDivCreate();
-
-		var customDate = document.getElementById("chooseDate").value;
-
-		if (Date.parse(customDate) > Date.parse(Date())) {
-			alert("Future Date is not allowed, Please Select Past Date");
-			customDate = '';
-		}
-		// alert(customDate);
-		var req = new XMLHttpRequest();
-		var url = "https://api.nasa.gov/planetary/apod?api_key=";
-		var api_key = "ghltjbpUXwQmt0dmq0Va2QHOiCxlM6YJt0NzHiqG&date=" + customDate;
-		req.open("GET", url + api_key);
-		req.send();
-		req.addEventListener("load", function(){
-		if(req.status == 200 && req.readyState == 4){
-		var response = JSON.parse(req.responseText);
-		document.getElementById("title").textContent = response.title;
-		document.getElementById("date").textContent = response.date;
-		document.getElementById("explanation").textContent = response.explanation;
-		picture.src = response.url;
-			if (picture.getAttribute('src') !== " " && picture.getAttribute('src').match(/jpg.*/)) {
-				picture.style.display = "block";
-				document.querySelector('.pic-div').classList.remove('dummy');
-			}else{
-				picture.src = "https://www.theramblehotel.com/wp-content/uploads/2017/11/dummy-800x800.jpg";
-				picture.style.display = "block";
-				document.querySelector('.pic-div').classList.remove('dummy');
-			}
-		}
-		});
-		}
-
-		function imgDivCreate(){
-			 document.querySelector('#pic').style.display = "none";
-			document.querySelector('.pic-div').classList.add('dummy');
-		}
-
-		getImg();
-		
-	</script>
+  <script src="app.js"></script>
+	
 </body>
 </html>
